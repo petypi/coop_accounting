@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Add custom fields to account.view_account_payment_tree -->
+        <record model="ir.ui.view" id="view_account_move_line_tree_inherit_1">
+            <field name="name">account.view.move.line.tree.inherit_1</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="ref" position="after">
+                    <field name="mpesa_ref"/>
+                    <field name="till_no"/>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

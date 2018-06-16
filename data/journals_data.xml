@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <data noupdate="1">
+            <!--Mpesa Sequence-->
+            <record id="seq_mpesa_journal" model="ir.sequence">
+                <field name="name">MPESA Journal Sequence</field>
+                <field name="prefix">MPC2B/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Mpesa Journal-->
+            <record id="mpesa_journal" model="account.journal">
+                <field name="name">MPESA Journal</field>
+                <field name="code">MPC2B</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_mpesa_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112028"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112028"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Payroll Sequence-->
+            <record id="seq_payroll_journal" model="ir.sequence">
+                <field name="name">Payroll Journal Sequence</field>
+                <field name="prefix">PAYRL/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Payroll Journal-->
+            <record id="payroll_journal" model="account.journal">
+                <field name="name">Payroll Journal</field>
+                <field name="code"> PAYRL</field>
+                <field name="type">general</field>
+                <field name="sequence_id" ref="seq_payroll_journal"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--General Ledger sequence-->
+            <record id="seq_general_ledger_journal" model="ir.sequence">
+                <field name="name">General Ledger Sequence</field>
+                <field name="prefix">GJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--General Ledger Journal-->
+            <record id="general_ledger_journal" model="account.journal">
+                <field name="name">General Ledger Journal</field>
+                <field name="code">GJ</field>
+                <field name="type">general</field>
+                <field name="sequence_id" ref="seq_general_ledger_journal"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--USD Bank Account sequence-->
+            <record id="seq_usd_bank_ccount_journal" model="ir.sequence">
+                <field name="name"> USD Bank Account Sequence</field>
+                <field name="prefix">UBNKJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--USD Bank Account Journal-->
+            <record id="usd_bank_ccount_journal" model="account.journal">
+                <field name="name">USD Bank Account Journal</field>
+                <field name="code">UBNKJ</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_usd_bank_ccount_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112024"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112024"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--BBK Bank Account General Sequence-->
+            <record id="seq_bank_account_general" model="ir.sequence">
+                <field name="name">BBK Bank Account General Sequence</field>
+                <field name="prefix">BBKGE/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--BBK Bank Account General Journal-->
+            <record id="bank_account_general_journal" model="account.journal">
+                <field name="name">Bank Account General Journal</field>
+                <field name="code">BBKGE</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_bank_account_general"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112025"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112025"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Account Receivables Sequence-->
+            <record id="seq_account_receivables" model="ir.sequence">
+                <field name="name">Account Receivables Sequence</field>
+                <field name="prefix">ARJ%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Account Receivables Journal-->
+            <record id="account_receivables_journal" model="account.journal">
+                <field name="name">Account Receivables Journal</field>
+                <field name="code">ARJ</field>
+                <field name="type">sale</field>
+                <field name="sequence_id" ref="seq_account_receivables"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_recv"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_recv"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Accounts Payable Sequence-->
+            <record id="seq_accounts_payable" model="ir.sequence">
+                <field name="name">Accounts Payable Sequence</field>
+                <field name="prefix">APJ%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Accounts Payable Journal-->
+            <record id="accounts_payable_journal" model="account.journal">
+                <field name="name">Accounts Payable Journal</field>
+                <field name="code">APJ</field>
+                <field name="type">general</field>
+                <field name="sequence_id" ref="seq_account_receivables"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_pay"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_pay"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Supplier Purchase Invoices Sequence-->
+            <record id="seq_supplier_purchase_invoices" model="ir.sequence">
+                <field name="name">Supplier Purchase Invoices Sequence</field>
+                <field name="prefix">SPI%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Supplier Purchase Invoices Journal-->
+            <record id="supplier_purchase_invoices_journal" model="account.journal">
+                <field name="name">Supplier Purchase Invoices Journal</field>
+                <field name="code">SPI</field>
+                <field name="type">purchase</field>
+                <field name="sequence_id" ref="seq_supplier_purchase_invoices"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_pay"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_pay"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Payroll Liabilities Sequence-->
+            <record id="seq_payroll_liabilities" model="ir.sequence">
+                <field name="name">Payroll Liabilities Sequence</field>
+                <field name="prefix">PAYJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Payroll Liabilities Journal-->
+            <record id="payroll_liabilities_journal" model="account.journal">
+                <field name="name">Payroll Liabilities Journal</field>
+                <field name="code">PAYJ</field>
+                <field name="type">general</field>
+                <field name="sequence_id" ref="seq_payroll_liabilities"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+	    <!--Credit Notes Sequence-->
+            <record id="seq_credit_notes" model="ir.sequence">
+                <field name="name">Credit Notes Sequence</field>
+                <field name="prefix">CNJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+	    <!--Credit Notes Journal-->
+            <record id="credit_notes_journal" model="account.journal">
+                <field name="name">Credit Notes Journal</field>
+                <field name="code">CNJ</field>
+                <field name="type">sale_refund</field>
+                <field name="sequence_id" ref="seq_credit_notes"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_sale"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Petty Cash Sequence-->
+            <record id="seq_petty_cash" model="ir.sequence">
+                <field name="name">Petty Cash Sequence</field>
+                <field name="prefix">PCJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Petty Cash Journal-->
+            <record id="petty_cash_journal" model="account.journal">
+                <field name="name">Petty Cash Journal</field>
+                <field name="code">PCJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_petty_cash"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112027"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112027"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+	    <!--Debit Notes Sequence-->
+            <record id="seq_debit_notes" model="ir.sequence">
+                <field name="name">Debit Notes Sequence</field>
+                <field name="prefix">DNJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+	    <!--Debit Notes Journal-->
+            <record id="debit_notes_journal" model="account.journal">
+                <field name="name">Debit Notes Journal</field>
+                <field name="code">DNJ</field>
+                <field name="type">purchase_refund</field>
+                <field name="sequence_id" ref="seq_debit_notes"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_pay"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Inventory Dept Float Journal Sequence-->
+            <record id="seq_inventory_dept_float_journal" model="ir.sequence">
+                <field name="name">Inventory Dept Float Journal Sequence</field>
+                <field name="prefix">FIJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Inventory Dept Float Journal-->
+            <record id="inventory_dept_float_journal" model="account.journal">
+                <field name="name">Inventory Dept Float Journal</field>
+                <field name="code">FIJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_inventory_dept_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112011"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112011"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Marketing Float Journal Sequence-->
+            <record id="seq_marketing_float_journal" model="ir.sequence">
+                <field name="name">Marketing Float Journal Sequence</field>
+                <field name="prefix">FMJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Marketing Float Journal-->
+            <record id="marketing_float_journal" model="account.journal">
+                <field name="name">Marketing Float Journal</field>
+                <field name="code">FMJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_marketing_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112013"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112013"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Distribution Float Journal Sequence-->
+            <record id="seq_distribution_float_journal" model="ir.sequence">
+                <field name="name">Distribution Float Journal Sequence</field>
+                <field name="prefix">FDJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Distribution Float Journal-->
+            <record id="distribution_float_journal" model="account.journal">
+                <field name="name">Distribution Float Journal</field>
+                <field name="code">FDJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_distribution_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112010"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112010"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Procurement Float Journal Sequence-->
+            <record id="seq_procurement_float_journal" model="ir.sequence">
+                <field name="name">Procurement Float Journal Sequence</field>
+                <field name="prefix">FPJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Procurement Float Journal-->
+            <record id="procurement_float_journal" model="account.journal">
+                <field name="name">Procurement Float Journal</field>
+                <field name="code">FPJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_procurement_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112009"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112009"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Accounts Float Journal Sequence-->
+            <record id="seq_accounts_float_journal" model="ir.sequence">
+                <field name="name">Accounts Float Journal Sequence</field>
+                <field name="prefix">FACJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Accounts Float Journal-->
+            <record id="accounts_float_journal" model="account.journal">
+                <field name="name">Accounts Float Journal</field>
+                <field name="code">FACJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_accounts_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112012"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112012"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--HR Float Journal Sequence-->
+            <record id="seq_hr_float_journal" model="ir.sequence">
+                <field name="name">HR Float Journal Sequence</field>
+                <field name="prefix">FHJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--HR Float Journal-->
+            <record id="hr_float_journal" model="account.journal">
+                <field name="name">HR Float Journal</field>
+                <field name="code">FHJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_hr_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112014"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112014"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+	    <!--Opening Balance Sequence-->
+            <record id="seq_opening_balance" model="ir.sequence">
+                <field name="name">Opening Balance Sequence</field>
+                <field name="prefix">OPBAL/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+	    <!--Opening Balance Journal-->
+            <record id="opening_balance_journal" model="account.journal">
+                <field name="name">Opening Balance Journal</field>
+                <field name="code">OPBAL</field>
+                <field name="type">situation</field>
+                <field name="sequence_id" ref="seq_opening_balance"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_o_income"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_o_income"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--IT Float Journal Sequence-->
+            <record id="seq_it_float_journal" model="ir.sequence">
+                <field name="name">IT Float Journal Sequence</field>
+                <field name="prefix">ITCJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--IT Float Journal-->
+            <record id="it_float_journal" model="account.journal">
+                <field name="name">IT Float Journal</field>
+                <field name="code">ITCJ</field>
+                <field name="type">cash</field>
+                <field name="sequence_id" ref="seq_it_float_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112015"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112015"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--BBK Bank Account - Purchases Sequence-->
+            <record id="seq_bbk_bank_account_purchases" model="ir.sequence">
+                <field name="name">BBK Bank Account - Purchases Sequence</field>
+                <field name="prefix">BBKPU/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--BBK Bank Account - Purchases Journal-->
+            <record id="bbk_bank_account_purchases_journal" model="account.journal">
+                <field name="name">BBK Bank Account - Purchases Journal</field>
+                <field name="code">BBKPU</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_bbk_bank_account_purchases"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112026"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112026"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Stocks Adjustments Journal Sequence-->
+            <record id="seq_stocks_adjustments_journal" model="ir.sequence">
+                <field name="name">Stocks Adjustments Journal Sequence</field>
+                <field name="prefix">STAJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Stocks Adjustments Journal-->
+            <record id="stocks_adjustments_journal" model="account.journal">
+                <field name="name">Stocks Adjustments Journal</field>
+                <field name="code">STAJ</field>
+                <field name="type">general</field>
+                <field name="sequence_id" ref="seq_stocks_adjustments_journal"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--Safaricom Buy Goods Journal Sequence-->
+            <record id="seq_safaricom_buy_goods_journal" model="ir.sequence">
+                <field name="name">Safaricom Buy Goods Journal Sequence</field>
+                <field name="prefix">STAJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--Safaricom Buy Goods Journal-->
+            <record id="safaricom_buy_goods_journal" model="account.journal">
+                <field name="name">Safaricom Buy Goods Journal</field>
+                <field name="code">SAFJN</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_safaricom_buy_goods_journal"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112029"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112029"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--USD CBA Bank AccountSequence-->
+            <record id="seq_usd_cba_bank_account" model="ir.sequence">
+                <field name="name">USD CBA Bank Account Sequence</field>
+                <field name="prefix">UCBAJ/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--USD CBA Bank AccountJournal-->
+            <record id="usd_cba_bank_account" model="account.journal">
+                <field name="name">USD CBA Bank Account</field>
+                <field name="code">UCBAJ</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_usd_cba_bank_account"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112032"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112032"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--CBA Bank Account - Purchase Sequence-->
+            <record id="seq_cba_bank_account_purchase" model="ir.sequence">
+                <field name="name">CBA Bank Account - Purchase Sequence</field>
+                <field name="prefix">CBAPU/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--CBA Bank Account - Purchase Journal-->
+            <record id="cba_bank_account_purchase_journal" model="account.journal">
+                <field name="name">CBA Bank Account - Purchase Journal</field>
+                <field name="code">CBAPU</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_cba_bank_account_purchase"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112034"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112034"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+            <!--CBA Bank Account-General Sequence-->
+            <record id="seq_cba_bank_account_general" model="ir.sequence">
+                <field name="name">CBA Bank Account - General Sequence</field>
+                <field name="prefix">CBAGE/%(year)s/%(month)s/</field>
+                <field name="padding">4</field>
+                <field name="implementation">no_gap</field>
+            </record>
+            <!--CBA Bank Account-General Journal-->
+            <record id="cba_bank_account_general_journal" model="account.journal">
+                <field name="name">CBA Bank Account - General Journal</field>
+                <field name="code">CBAGE</field>
+                <field name="type">bank</field>
+                <field name="sequence_id" ref="seq_cba_bank_account_general"/>
+                <field name="default_credit_account_id" ref="l10n_copia_coa.conf_a_112033"/>
+                <field name="default_debit_account_id" ref="l10n_copia_coa.conf_a_112033"/>
+                <field name="refund_sequence" eval="True"/>
+            </record>
+
+        </data>
+</odoo>

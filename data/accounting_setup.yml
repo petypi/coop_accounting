@@ -1,0 +1,3 @@
+-
+  !python {model: res.currency, id: base.EUR}: |
+    self[0].write({"active": False})

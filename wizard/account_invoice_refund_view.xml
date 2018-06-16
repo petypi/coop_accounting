@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        
+        <record id="view_account_invoice_refund_inherit" model="ir.ui.view">
+            <field name="name">account.invoice.refund.form.inherit</field>
+            <field name="model">account.invoice.refund</field>
+            <field name="inherit_id" ref="account.view_account_invoice_refund"/>
+            <field name="arch" type="xml">
+                 <xpath expr="/form/group/group[4]" position="after">
+                        <group>
+                             <field name="type" invisible="1"/>
+                             <field name="issue_on" attrs="{'required': [('type', '!=', 'out_invoice')] ,'invisible': [('type', '!=', 'in_invoice')]}"/>
+                         </group>
+                         <group>
+                             <field name="account_id" attrs="{'required': [('type', '!=', 'out_invoice')], 'invisible': [('type', '!=', 'in_invoice')]}"/>
+                         </group>
+                  </xpath>
+            </field>
+        </record>
+        
+       
+    </data>
+</odoo>

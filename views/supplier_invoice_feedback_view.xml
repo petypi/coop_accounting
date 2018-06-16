@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_account_report_supplier_invoice_feedback" model="ir.actions.client">
+            <field name="name">Supplier Invoice Feedback</field>
+            <field name="tag">account_report</field>
+            <field name="context" eval="{'model': 'account.supplier.invoice.feedback'}" />
+        </record>
+        <menuitem id="menu_action_account_report_supplier_invoice_feedback"
+                  name="Supplier Invoice Feedback"
+                  action="action_account_report_supplier_invoice_feedback"
+                  parent="account_reports.account_reports_partners_reports_menu"
+                  groups="account.group_account_user"/>
+
+        <template id="line_template_supplier_invoice_feedback_report" inherit_id="account_reports.line_template" primary="True">
+            <xpath expr="//ul[hasclass('o_account_reports_domain_dropdown')]/li[last()]" position="before">
+                <li t-if="line['caret_options'] == 'invoice'" role="presentation" groups="account.group_account_user">
+                    <a role="menuitem" tabindex="-1" t-att-data-id="line['id']" action="open_invoices">View Pickings</a>
+                </li>
+            </xpath>
+        </template>
+
+        <template id="template_supplier_invoice_feedback_report" inherit_id="account_reports.main_template" primary="True">
+            <xpath expr="//tbody" position="replace">
+                <t t-if="lines.get('lines')">
+                    <t t-call="copia_accounting.line_template_supplier_invoice_feedback_report" />
+                </t>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

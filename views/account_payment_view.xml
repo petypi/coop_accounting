@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Add custom fields to account.view_account_payment_tree -->
+        <record model="ir.ui.view" id="view_account_payment_tree_inherit_1">
+            <field name="name">account.payment.tree.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+
+                <field name="payment_date" position="after">
+                    <field name="create_date" string="Created"/>
+                    <field name="ref"/>
+                    <field name="till_number"/>                    
+                </field>
+
+                <field name="partner_id" position="attributes">
+                    <attribute name="string">Partner</attribute>
+                </field>             
+
+                <field name="payment_method_id" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+
+            </field>
+        </record>
+
+        <!-- Add custom fields to account.view_account_payment_form -->
+        <record model="ir.ui.view" id="view_account_payment_tree_inherit">
+            <field name="name">account.payment.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <field name="payment_date" position="before">
+                    <field name="ref"/>
+                    <field name="till_number"/>
+                    <field name="mm_system"/>
+                    <field name="phone" readonly="1"/>
+                </field>
+                <field name="partner_id" position="after">
+                    <field name="paid_by" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <!--Add mpesa ref payment search view -->
+        <record id="view_account_payment_search_inherit" model="ir.ui.view">
+            <field name="name">account.payment.search</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_search"/>
+            <field name="arch" type="xml">
+                <!-- Ref Search -->
+                <field name="name" position="after">
+                    <field name="ref"  string="Ref #"/>
+                </field>
+
+                <!-- Third Party Payments -->
+                <filter name="state_sent" position="after">
+                    <filter string="3rd Party Payments" domain="[('partner_id.partner_type','!=','agent')]"/>
+                </filter>
+            </field>
+        </record>
+        
+        <!--Add custom fields to journal tree view -->
+        <record id="view_account_journal_tree_inherit" model="ir.ui.view">
+            <field name="name">account.journal.tree.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account.view_account_journal_tree"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="create_uid" string="Created By"/>
+                    <field name="create_date" string="Created Date"/>
+                    <field name="write_uid" string="Changed By"/>
+                    <field name="write_date" string="Write Date"/>
+                </field>
+            </field>
+        </record>
+
+        <!--Add custom fields to journal form view -->
+        <record id="view_account_journal_form_inherit" model="ir.ui.view">
+            <field name="name">account.journal.form.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[3]" position="after">
+                    <page name="write_info" string="Edit Info">
+                        <group>
+                            <group>
+                                <field name="create_uid" string="Created By" readonly="1"/>
+                                <field name="create_date" string="Created Date" readonly="1"/>
+                                <field name="write_uid" string="Changed By" readonly="1"/>
+                                <field name="write_date" string="Write Date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
